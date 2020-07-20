@@ -1,0 +1,19 @@
+.tab {
+  background-color: #edeef6;
+  border-radius: 6px;
+  padding: 2px;
+  margin-bottom: 25px;
+}
+.tab-btn {
+  width: 100%;
+  height: 46px;
+  margin: 5px;
+  line-height: 46px;
+  text-align: center;
+  color: #7f808c;
+  border-radius: 6px;
+}
+.tab-btn-active {
+  background-color: #fff;
+  color: #000000;
+}

@@ -1,0 +1,97 @@
+.create-group {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+label {
+  color: #7f808c;
+}
+.photo-upload-card {
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  background-color: #edeef6;
+  border-radius: 6px;
+  justify-content: center;
+}
+.photo-upload-card div {
+  justify-content: center;
+}
+.photo-upload-icon {
+  background-color: #0176ff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  justify-content: center;
+}
+.photo-upload-icon svg {
+  padding-top: 12.5px;
+  width: 25px;
+  height: 25px;
+  color: #fff;
+}
+.photo-upload-text {
+  font-size: 15px;
+  text-align: center;
+  color: #7f808c;
+}
+#photo-upload {
+  display: none;
+}
+.stretched-label {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.group-name-input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 20px 15px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  font-size: 0.9em;
+  color: #7f808c;
+  background-color: #edeef6;
+  background-clip: padding-box;
+  border: none;
+}
+.hide {
+  display: none;
+}
+.group-create-btn {
+  padding: 20px;
+  border-radius: 6px;
+  background-color: #0176ff;
+  color: #fff;
+  width: 100%;
+  font-size: 18px;
+  border: none;
+}
+.members-letter {
+  color: #7f808c;
+}
+.member-card {
+  position: relative;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 6px;
+  align-items: center;
+}
+.member-card-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0176ff;
+}
+.member-card-name {
+  margin-left: 15px;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.custom-checkbox {
+  margin-left: auto;
+}

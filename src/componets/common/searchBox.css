@@ -1,0 +1,23 @@
+.search {
+  width: 100%;
+  padding: 20px 15px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  font-size: 0.9em;
+  color: #7f808c;
+  background-color: #edeef6;
+  background-clip: padding-box;
+  border: none;
+}
+.search:focus {
+  outline: none;
+}
+.search-icon {
+  padding-top: 1.2rem;
+  padding-left: 0.5rem;
+  color: #7f808c;
+  background-color: #edeef6;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  width: 3.6rem;
+}

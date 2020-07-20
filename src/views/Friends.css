@@ -1,0 +1,48 @@
+.friends {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.general-margin {
+    margin-top: 20px;
+}
+.general-padding {
+    padding: 15px 20px;
+}
+.invite-btn {
+    width: 100%;
+    border: none;
+    color: #212121;
+    background-color: #edeef6;
+    border-radius: 6px;
+    align-items: center!important;
+    font-size: 0.9em;
+    letter-spacing: 0.075em;
+}
+.ml-auto {
+    margin-left: auto;
+}
+.align-items-c {
+    align-items: center;
+}
+.friend-card {
+    background-color: white;
+    border-radius: 6px;
+    align-items: center;
+}
+.friend-card-img {
+    width: 50px;
+    height: 50px;
+    background-color: yellowgreen;
+    border-radius: 50%;
+    border: none;
+}
+.friend-card-status {
+    font-size: 0.9em;
+    color: rgb(127, 128, 140);;
+}
+.friend-card-info {
+    margin-left: 15px;
+}
+.friend-card-more {
+    color: rgb(127, 128, 140);;
+}
