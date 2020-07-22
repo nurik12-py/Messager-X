@@ -6,62 +6,88 @@ import FavoriteFriends from "../componets/favoriteFriends";
 import ChatCard from "../componets/chatCard";
 import NavBar from "../componets/navBar";
 import {
-  getChat,
-  getUser,
-  getAllFriendsFor,
   getChatsFor,
+  getFavoriteFriends,
+  getUser,
 } from "../services/fakeMainService";
 
 class Chats extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user,
+      user: null,
+      favorite: [],
       chats: [],
+      filtered: [],
     };
-    console.log("chat", props);
   }
   handleChange = (e) => {
-    console.log(e.target.value);
+    const filtered = this.state.chats.filter((chat) => {
+      if (
+        chat.user2.startsWith(e.target.value) ||
+        chat.user1.startsWith(e.target.value)
+      )
+        return chat;
+    });
+    console.log(this.state);
+    this.setState({ filtered });
   };
-  componentDidMount() {
-    if (localStorage.getItem("email")) {
-      const user = getUser(localStorage.getItem("email"));
-      console.log("User get from localstore", user);
+  async componentDidMount() {
+    try {
+      const { data: chats } = await getChatsFor(localStorage.getItem("email"));
+
+      const { data: favorite } = await getFavoriteFriends(
+        localStorage.getItem("email")
+      );
+      const { data: user } = await getUser(localStorage.getItem("email"));
+      console.log(user);
       this.setState({
+        chats: chats["data"],
+        favorite,
         user,
-        friends: getAllFriendsFor(user["email"]),
-        chats: getChatsFor(user["email"]),
+        filtered: chats["data"],
       });
+    } catch (ex) {
+      console.log(ex.response.status === 404 ? "Chats not found" : "");
     }
   }
   render() {
-    const { friends, user } = this.state;
+    const noChats = <h3 align="center">No chats yet</h3>;
     return (
       <div>
         <div className="animate">
           <div className="view-margin">
             <h2>Chats</h2>
             <SearchBox onChange={this.handleChange} />
-            <FavoriteFriends />
-            <div className="chat-cards">
-              {this.state.chats.map((chat) => (
-                <Link to="chat-room">
-                  <ChatCard
-                    name={chat.user1 !== user.email ? chat.name1 : chat.name2}
-                    lastMessage={
-                      chat.messages[chat.messages.length - 1]["message"]
-                    }
-                    lastMessageTime="14:37"
-                    photoUrl={
-                      chat.user1 !== user.email ? chat.photo1 : chat.photo2
-                    }
-                  />
-                </Link>
-              ))}
-            </div>
+            {this.state.favorite && (
+              <FavoriteFriends favorite={this.state.favorite} />
+            )}
+            {this.state.chats.length === 0 ? noChats : null}
+            {this.state.chats && (
+              <div className="chat-cards">
+                {this.state.filtered.map((chat) => (
+                  <Link to={"/chat-room/" + chat.chat_id}>
+                    <ChatCard
+                      name={
+                        this.state.user.email === chat.user1
+                          ? chat.name2
+                          : chat.name1
+                      }
+                      lastMessage={
+                        chat.messages[chat.messages.length - 1]["message"]
+                      }
+                      lastMessageTime={
+                        chat.messages[chat.messages.length - 1]["dateSent"]
+                      }
+                      photoUrl=""
+                    />
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
+
         <NavBar />
       </div>
     );

@@ -1,13 +1,17 @@
 import React from "react";
 import Avatar from "./common/avatar";
 import "./favoriteFriends.css";
-import _ from "lodash";
 
-const FavoriteFriends = () => {
+const FavoriteFriends = ({ favorite }) => {
   return (
     <div className="avatars">
-      {_.range(1, 11).map((n) => (
-        <Avatar name={n} src={""} key={n} isOnline={true} />
+      {favorite.map((user) => (
+        <Avatar
+          name={user.name}
+          src={user.photoUrl}
+          key={user.email}
+          isOnline={false}
+        />
       ))}
     </div>
   );

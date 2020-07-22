@@ -8,50 +8,32 @@ import Friends from "./views/Friends";
 import Profile from "./views/Profile";
 import ChatRoom from "./views/ChatRoom";
 import Login from "./views/Login";
-import {
-  getUser,
-  getAllFriendsFor,
-  getChatsFor,
-} from "./services/fakeMainService";
+import { getUser } from "./services/fakeMainService";
 
 class App extends React.Component {
   state = {
     user: null,
-    friends: [],
-    chats: [],
   };
-  componentDidMount() {
+  async componentDidMount() {
     if (localStorage.getItem("email")) {
-      const user = getUser(localStorage.getItem("email"));
-      console.log("User get from localstore", user);
-      this.setState({
-        user,
-        friends: getAllFriendsFor(user["email"]),
-        chats: getChatsFor(user["email"]),
-      });
+      const { data: user } = await getUser(localStorage.getItem("email"));
+      this.setState({ user });
     }
   }
   render() {
-    const { user, friends, chats } = this.state;
-    console.log(user, friends);
     return (
       <div className="App">
         <Switch>
-          {user && <Route exact path="/" component={Chats} />}
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/chats" render={() => <Chats />} />
           <Route
             exact
-            path="/chats"
-            render={() => <Chats user={user} friends={friends} chats={chats} />}
-          />
-          <Route
-            exact
-            path="/chat-room"
-            render={() => <ChatRoom user={user} />}
+            path="/chat-room/:id"
+            render={({ match }) => <ChatRoom id={match.params.id} />}
           />
           <Route exact path="/create-group" component={CreateGroup} />
           <Route exact path="/friends" render={() => <Friends />} />
-          <Route exact path="/profile" render={() => <Profile user={user} />} />
+          <Route exact path="/profile" render={() => <Profile />} />
           <Route exact path="/settings" component={Settings} />
         </Switch>
       </div>

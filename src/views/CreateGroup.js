@@ -12,6 +12,7 @@ class CreateGroup extends React.Component {
       isSelected: true,
     };
     this.onClick = this.onClick.bind(this);
+    console.log(props);
   }
   onClick(temp) {
     this.setState({ isSelected: temp });
