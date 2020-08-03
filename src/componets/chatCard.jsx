@@ -12,14 +12,15 @@ const ChatCard = ({
     <div className="chat-card">
       <Avatar src={photoUrl} />
       <div className="chat-card-body">
-        <div className="chat-card-body-title">
-          <div className="chat-card-body-name">{name}</div>
-          <div className="chat-card-body-time">{lastMessageTime}</div>
-        </div>
+        <div className="chat-card-body-name">{name}</div>
+
         <div className="chat-card-body-message text-truncate">
           {lastMessage}
         </div>
       </div>
+
+      <div className="chat-card-body-time">{lastMessageTime}</div>
+
       {hasUnreadMessages && <div className="chat-card-indicator"></div>}
     </div>
   );

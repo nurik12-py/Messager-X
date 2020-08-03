@@ -3,6 +3,7 @@ import Avatar from "./common/avatar";
 import "./favoriteFriends.css";
 
 const FavoriteFriends = ({ favorite }) => {
+  console.log(favorite);
   return (
     <div className="avatars">
       {favorite.map((user) => (

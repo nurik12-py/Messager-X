@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 import NavBar from "../componets/navBar";
-import { ReactComponent as GlobeIcon } from "../icons/globe.svg";
-import { ReactComponent as MailIcon } from "../icons/mail.svg";
-import { ReactComponent as Gear } from "../icons/gear.svg";
-import { ReactComponent as OutIcon } from "../icons/out.svg";
-import { ReactComponent as PhoneIcon } from "../icons/phone.svg";
+import { ReactComponent as GlobeIcon } from "../../node_modules/bootstrap-icons/icons/globe.svg";
+import { ReactComponent as MailIcon } from "../../node_modules/bootstrap-icons/icons/mailbox.svg";
+import { ReactComponent as Gear } from "../../node_modules/bootstrap-icons/icons/gear-wide-connected.svg";
+import { ReactComponent as OutIcon } from "../../node_modules/bootstrap-icons/icons/box-arrow-right.svg";
+import { ReactComponent as PhoneIcon } from "../../node_modules/bootstrap-icons/icons/telephone.svg";
 import { getUser } from "../services/fakeMainService";
+import { getCurrentEmail } from "../services/authService";
+import ProfileCard from "../componets/profileCard";
 
 class Profile extends Component {
   constructor() {
@@ -16,13 +18,8 @@ class Profile extends Component {
       user: null,
     };
   }
-  handleLogout = () => {
-    localStorage.removeItem("email");
-    localStorage.removeItem("token");
-    window.location = "/";
-  };
   async componentDidMount() {
-    const { data: user } = await getUser(localStorage.getItem("email"));
+    const { data: user } = await getUser(getCurrentEmail());
     this.setState({ user });
   }
   render() {
@@ -34,30 +31,23 @@ class Profile extends Component {
             <h2>Profile</h2>
             {user && (
               <React.Fragment>
-                <div className="profile-card">
-                  <div className="d-flex">
-                    <img
-                      className="profile-card-photo"
-                      src={user.photoUrl}
-                      alt=""
-                    />
-                  </div>
-                  <h4 className="profile-card-fullname">{user.name}</h4>
-                  <div className="profile-card-description">
-                    Java, Python, JS, CSS
-                  </div>
-                </div>
+                <ProfileCard
+                  photoUrl={user.photoUrl}
+                  title={user.name}
+                  description={user.description && user.description}
+                />
                 <div className="base-card-container">
-                  <div className="base-card d-flex">
-                    <div>
-                      <div className="base-card-title">Country</div>
-                      <div>{user.country}</div>
+                  {user.country && (
+                    <div className="base-card d-flex">
+                      <div>
+                        <div className="base-card-title">Country</div>
+                        <div>{user.country}</div>
+                      </div>
+                      <div>
+                        <GlobeIcon />
+                      </div>
                     </div>
-                    <div>
-                      <GlobeIcon />
-                    </div>
-                  </div>
-                  <hr />
+                  )}
                   <div className="base-card d-flex">
                     <div>
                       <div className="base-card-title">Email</div>
@@ -67,35 +57,20 @@ class Profile extends Component {
                       <MailIcon />
                     </div>
                   </div>
-                  <hr />
-                  <div className="base-card d-flex">
-                    <div>
-                      <div className="base-card-title">Phone</div>
-                      <div>{user.phone}</div>
+                  {user.phone && (
+                    <div className="base-card d-flex">
+                      <div>
+                        <div className="base-card-title">Phone</div>
+                        <div>{user.phone}</div>
+                      </div>
+                      <div>
+                        <PhoneIcon />
+                      </div>
                     </div>
-                    <div>
-                      <PhoneIcon />
-                    </div>
-                  </div>
+                  )}
                 </div>
               </React.Fragment>
             )}
-            {/* <div className="base-card-container">
-            <div className="d-flex base-card">
-              <div>Twitter</div>
-              <div>Icon</div>
-            </div>
-            <hr />
-            <div className="d-flex base-card">
-              <div>Facebook</div>
-              <div>Icon</div>
-            </div>
-            <hr />
-            <div className="d-flex base-card">
-              <div>GitHub</div>
-              <div>Icon</div>
-            </div>
-          </div>*/}
           </div>
         </div>
         {user && (
@@ -107,9 +82,13 @@ class Profile extends Component {
               <Gear />
             </div>
 
-            <div className="d-flex btn" onClick={this.handleLogout}>
-              <div>Logout</div>
-              <OutIcon />
+            <div className="d-flex btn">
+              <Link to="/logout">
+                <div>Logout</div>
+              </Link>
+              <Link to="/logout">
+                <OutIcon />
+              </Link>
             </div>
           </div>
         )}

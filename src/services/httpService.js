@@ -1,4 +1,9 @@
 import axios from "axios";
+import auth from "./authService";
+
+axios.defaults.headers.common["Authorization"] = "Bearer " + auth.getJwt();
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
     error.response &&

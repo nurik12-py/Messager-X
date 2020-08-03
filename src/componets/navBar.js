@@ -1,22 +1,16 @@
 import React from "react";
-import { ReactComponent as Chat } from "../icons/chat.svg";
-import { ReactComponent as Edit } from "../icons/edit.svg";
-import { ReactComponent as Gear } from "../icons/gear.svg";
-import { ReactComponent as Person } from "../icons/person.svg";
-import { ReactComponent as People } from "../icons/people.svg";
+import { ReactComponent as Chat } from "../../node_modules/bootstrap-icons/icons/chat.svg";
+import { ReactComponent as Edit } from "../../node_modules/bootstrap-icons/icons/pencil-square.svg";
+import { ReactComponent as Gear } from "../../node_modules/bootstrap-icons/icons/gear-wide-connected.svg";
+import { ReactComponent as Person } from "../../node_modules/bootstrap-icons/icons/person.svg";
+import { ReactComponent as People } from "../../node_modules/bootstrap-icons/icons/people.svg";
 import { NavLink } from "react-router-dom";
 
 import "./navBar.css";
 
 const NavBar = () => {
-  const icons = [<People />, <Edit />, <Chat />, <Person />, <Gear />];
-  const links = [
-    "/create-group",
-    "/friends",
-    "/chats",
-    "/profile",
-    "/settings",
-  ];
+  const icons = [<Edit />, <Chat />, <Person />, <Gear />];
+  const links = ["/friends", "/chats", "/profile", "/settings"];
 
   return (
     <div className="navbar">

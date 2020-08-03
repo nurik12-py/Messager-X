@@ -1,0 +1,24 @@
+.profile-card {
+  padding: 25px 20px;
+  background-color: #ffffff;
+  border-radius: 6px;
+}
+.profile-card-photo-container {
+  display: flex;
+  justify-content: center;
+}
+.profile-card-photo {
+  width: 80px;
+  height: 80px;
+  background-color: #7f808c;
+  border-radius: 50%;
+}
+.profile-card-title {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.profile-card-description {
+  text-align: center;
+  color: #7f808c;
+}

@@ -1,38 +1,38 @@
 .login-page {
-    margin-left: 20px;
-    margin-right: 20px;
-    height: 500px;
-    display: flex;
-    justify-content:center;
-    align-items:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
-
-#recaptcha-container {
-    width: 100%;
+.logo {
+  width: 50%;
 }
-.login-text {
-    text-align: center;
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
 }
-.login-input {
-    width: 100%;
+.login-btn {
+  margin: 10px 5px;
+  padding: 10px;
+  background-color: #0066ff;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 3px rgba(37, 37, 37, 0.5);
 }
-.login-btn-container {
-    justify-content: center;
-}
-.phone-input {
-    width: 100%;
-    padding: 20px 15px;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    font-size: .9em;
-    color: #7f808c;
-    background-color: #edeef6;
-    background-clip: padding-box;
-    border: none;
-}
-.phone-input:focus {
-    outline: none;
-}
-.phone-number-icon {
-    color: #7f808c;
+.google-logo {
+  width: 36px;
+  height: 36px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 1px;
+  margin-left: 5px;
 }

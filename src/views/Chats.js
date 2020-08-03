@@ -10,15 +10,16 @@ import {
   getFavoriteFriends,
   getUser,
 } from "../services/fakeMainService";
-
+import { getCurrentEmail } from "../services/authService";
+import { makeOnline } from "../services/statusService";
 class Chats extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
       favorite: [],
       chats: [],
       filtered: [],
+      email: getCurrentEmail(),
     };
   }
   handleChange = (e) => {
@@ -28,37 +29,42 @@ class Chats extends React.Component {
         chat.user1.startsWith(e.target.value)
       )
         return chat;
+      return false;
     });
     console.log(this.state);
     this.setState({ filtered });
   };
   async componentDidMount() {
-    try {
-      const { data: chats } = await getChatsFor(localStorage.getItem("email"));
-
-      const { data: favorite } = await getFavoriteFriends(
-        localStorage.getItem("email")
-      );
-      const { data: user } = await getUser(localStorage.getItem("email"));
-      console.log(user);
-      this.setState({
-        chats: chats["data"],
-        favorite,
-        user,
-        filtered: chats["data"],
-      });
-    } catch (ex) {
-      console.log(ex.response.status === 404 ? "Chats not found" : "");
-    }
+    const { email } = this.state;
+    const { data: user } = await getUser(email);
+    const { data: favorite } = await getFavoriteFriends(email);
+    const { data: chats } = await getChatsFor(email);
+    makeOnline(email);
+    this.setState({
+      chats: chats["data"],
+      favorite,
+      user,
+      filtered: chats["data"],
+      hideNavbar: false,
+    });
   }
   render() {
     const noChats = <h3 align="center">No chats yet</h3>;
+    console.log(this.state.chats);
     return (
       <div>
         <div className="animate">
           <div className="view-margin">
             <h2>Chats</h2>
-            <SearchBox onChange={this.handleChange} />
+            <SearchBox
+              onChange={this.handleChange}
+              onFocus={() => {
+                this.setState({ hideNavbar: true });
+              }}
+              onBlur={() => {
+                this.setState({ hideNavbar: false });
+              }}
+            />
             {this.state.favorite && (
               <FavoriteFriends favorite={this.state.favorite} />
             )}
@@ -66,7 +72,7 @@ class Chats extends React.Component {
             {this.state.chats && (
               <div className="chat-cards">
                 {this.state.filtered.map((chat) => (
-                  <Link to={"/chat-room/" + chat.chat_id}>
+                  <Link key={chat.chat_id} to={"/chat-room/" + chat._id}>
                     <ChatCard
                       name={
                         this.state.user.email === chat.user1
@@ -88,7 +94,7 @@ class Chats extends React.Component {
           </div>
         </div>
 
-        <NavBar />
+        {!this.state.hideNavbar && <NavBar />}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./CreateGroup.css";
-import { ReactComponent as PictureIcon } from "../icons/photo.svg";
+import { ReactComponent as PictureIcon } from "../../node_modules/bootstrap-icons/icons/image.svg";
 import SearchBox from "../componets/common/searchBox";
 import NavBar from "../componets/navBar";
 import Tab from "../componets/common/tab";
@@ -12,7 +12,6 @@ class CreateGroup extends React.Component {
       isSelected: true,
     };
     this.onClick = this.onClick.bind(this);
-    console.log(props);
   }
   onClick(temp) {
     this.setState({ isSelected: temp });

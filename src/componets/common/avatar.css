@@ -1,7 +1,8 @@
 .avatar {
-  display: inline-block;
+  display: inline-flex;
   position: relative;
   margin-right: 1.5em;
+  flex-direction: column;
 }
 
 .online::before {
@@ -25,6 +26,8 @@
   min-height: 2.75rem;
   width: 2.75rem;
   min-width: 2.75rem;
+  align-self: center;
+  justify-self: center;
   background-color: burlywood;
   border-radius: 50%;
 }
